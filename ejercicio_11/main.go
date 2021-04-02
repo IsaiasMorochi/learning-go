@@ -19,6 +19,10 @@ type Vegetal interface {
 	ClasificacionVegetal() string
 }
 
+type SerVivo interface {
+	estaVivo() bool
+}
+
 /* Genero Humano*/
 type Hombre struct {
 	edad       int
@@ -28,6 +32,7 @@ type Hombre struct {
 	pensando   bool
 	comiendo   bool
 	esHombre   bool
+	vivo       bool
 }
 
 type Mujer struct {
@@ -54,6 +59,10 @@ func (h *Hombre) sexo() string {
 	}
 }
 
+func (h *Hombre) estaVivo() bool {
+	return h.vivo
+}
+
 func HumanoRespirando(human Humano) {
 	human.respirar()
 	fmt.Printf("Soy un/a %s, y ya estoy respirando \n", human.sexo())
@@ -65,6 +74,7 @@ type Perro struct {
 	respirando bool
 	comiendo   bool
 	carnivoro  bool
+	vivo       bool
 }
 
 func (p *Perro) respirar() {
@@ -77,6 +87,10 @@ func (p *Perro) comer() {
 
 func (p *Perro) EsCarnivoro() bool {
 	return p.carnivoro
+}
+
+func (p *Perro) estaVivo() bool {
+	return p.vivo
 }
 
 func AnimalesRespirar(an Animal) {
@@ -92,6 +106,11 @@ func AnimalesCarnivoros(an Animal) int {
 	}
 }
 
+/* SER VIVO */
+func estoyVivo(v SerVivo) bool {
+	return v.estaVivo()
+}
+
 func main() {
 
 	// Pedro := new(Hombre)
@@ -103,9 +122,12 @@ func main() {
 
 	totalCarnivoros := 0
 	Dogo := new(Perro)
+	Dogo.vivo = true
 	Dogo.carnivoro = true
 	AnimalesRespirar(Dogo)
 	totalCarnivoros += AnimalesCarnivoros(Dogo)
 
-	fmt.Printf("Total carnivoros %d", totalCarnivoros)
+	fmt.Printf("Total carnivoros %d \n", totalCarnivoros)
+	fmt.Printf("Estoy vivo = %t", estoyVivo(Dogo))
+
 }
