@@ -1,0 +1,2 @@
+Hola es un ejemplo de leer el archivo.
+Esto es la manipulacion del archivo.
